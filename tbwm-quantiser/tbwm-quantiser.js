@@ -37,6 +37,7 @@ function TBScales() {
     this.scaleindex         = 0; // Chromatic
     this.scale              = this.mpscales[this.scaleindex]["notes"];
     this.transpose          = 0;
+    this.shift              = 0;
     this.scalerandomise     = 0;
     // Element IDs
     this.idprefix           = "tbms";
@@ -167,6 +168,14 @@ TBScales.prototype.addtransposeselect = function(container) {
     });
 };
 
+///////////////////////////
+// Set note-shift amount //
+///////////////////////////
+
+TBScales.prototype.setshift = function(amount) {
+    this.shift = Math.max(amount, 0) % 11;
+};
+
 //////////////////////////////////////
 // Set randomise note-lookup amount //
 //////////////////////////////////////
@@ -205,7 +214,7 @@ TBScales.prototype.addrandomrange = function(container) {
 
     // Listen for changes
     var self = this;
-    range.addEventListener('change', function(){
+    range.addEventListener('change', function() {
         // Set random amount
         self.setrandomise(parseFloat(this.value));
     });
@@ -219,12 +228,12 @@ TBScales.prototype.applyscale = function(note) {
     // Get octave
     var oct = Math.floor(note / 12);
     // Index of note within octave
-    var index = note % 12;
+    var index = (note + this.shift) % 12;
     // Randomise note-lokup index if threshold set
     if((this.scalerandomise > 0) && (Math.random() <= this.scalerandomise))
         index = Math.round(Math.random() * 11);
     // Return note
-    return 12 * oct + this.scale[index] + this.transpose;
+    return Math.max(Math.min(12 * oct + this.scale[index] + this.transpose, 127), 0);
 };
 
 //////////////////////
