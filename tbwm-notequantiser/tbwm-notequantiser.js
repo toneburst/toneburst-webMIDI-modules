@@ -4,7 +4,7 @@
  *
  */
 
-function TBScales() {
+function TBWMNotequantiser() {
     // Scales from Mutable Instruments MIDIPal firmware
     // Olivier Gillet
     // NAMES MAY BE WRONG!
@@ -50,7 +50,7 @@ function TBScales() {
 // Check DOM ID passed and element exists //
 ////////////////////////////////////////////
 
-TBScales.prototype.checkdomelement = function(id) {
+TBWMNotequantiser.prototype.checkdomelement = function(id) {
     var result = null;
     // No element id
     if(!id) {
@@ -73,7 +73,7 @@ TBScales.prototype.checkdomelement = function(id) {
 // Log UI Container DOM element not found error //
 //////////////////////////////////////////////////
 
-TBScales.prototype.errordomelement = function() {
+TBWMNotequantiser.prototype.errordomelement = function() {
     console.log("Error: Container element not found. You need to specify ID of an existing element (with or without leading '#') when initialising this instance or calling this method");
 };
 
@@ -81,7 +81,7 @@ TBScales.prototype.errordomelement = function() {
 // Set scale //
 ///////////////
 
-TBScales.prototype.setscale = function(index) {
+TBWMNotequantiser.prototype.setscale = function(index) {
     this.scaleindex = Math.min(this.mpscales.length - 1, index);
     this.scale = this.mpscales[this.scaleindex]["notes"];
 };
@@ -90,7 +90,7 @@ TBScales.prototype.setscale = function(index) {
 // Add select control to choose scale to DOM //
 ///////////////////////////////////////////////
 
-TBScales.prototype.addscaleselect = function(container) {
+TBWMNotequantiser.prototype.addscaleselect = function(container) {
     // Check DOM element
     var cntnr = this.checkdomelement(container);
     if(cntnr === "error")
@@ -128,7 +128,7 @@ TBScales.prototype.addscaleselect = function(container) {
 // Set transpose amount //
 //////////////////////////
 
-TBScales.prototype.settranspose = function(amount) {
+TBWMNotequantiser.prototype.settranspose = function(amount) {
     this.transpose = parseInt(amount);
 };
 
@@ -136,7 +136,7 @@ TBScales.prototype.settranspose = function(amount) {
 // Add Transpose control to DOM //
 //////////////////////////////////
 
-TBScales.prototype.addtransposeselect = function(container) {
+TBWMNotequantiser.prototype.addtransposeselect = function(container) {
     // Check DOM element
     var cntnr = this.checkdomelement(container);
     if(cntnr === "error")
@@ -172,7 +172,7 @@ TBScales.prototype.addtransposeselect = function(container) {
 // Set note-shift amount //
 ///////////////////////////
 
-TBScales.prototype.setshift = function(amount) {
+TBWMNotequantiser.prototype.setshift = function(amount) {
     this.shift = Math.max(amount, 0) % 11;
 };
 
@@ -180,7 +180,7 @@ TBScales.prototype.setshift = function(amount) {
 // Set randomise note-lookup amount //
 //////////////////////////////////////
 
-TBScales.prototype.setrandomise = function(amount) {
+TBWMNotequantiser.prototype.setrandomise = function(amount) {
     this.scalerandomise = amount;
 };
 
@@ -188,7 +188,7 @@ TBScales.prototype.setrandomise = function(amount) {
 // Add slider for randomise amount to DOM //
 ////////////////////////////////////////////
 
-TBScales.prototype.addrandomrange = function(container) {
+TBWMNotequantiser.prototype.addrandomrange = function(container) {
     // Check DOM element
     var cntnr = this.checkdomelement(container);
     if(cntnr === "error")
@@ -224,7 +224,7 @@ TBScales.prototype.addrandomrange = function(container) {
 // Apply scale to MIDI note and return result //
 ////////////////////////////////////////////////
 
-TBScales.prototype.applyscale = function(note) {
+TBWMNotequantiser.prototype.applyscale = function(note) {
     // Get octave
     var oct = Math.floor(note / 12);
     // Index of note within octave
@@ -240,7 +240,7 @@ TBScales.prototype.applyscale = function(note) {
 // Get scales array //
 //////////////////////
 
-TBScales.prototype.getscales = function() {
+TBWMNotequantiser.prototype.getscales = function() {
     return this.mpscales;
 };
 
@@ -248,7 +248,7 @@ TBScales.prototype.getscales = function() {
 // Dump scale indices and names to the JavaScript console //
 ////////////////////////////////////////////////////////////
 
-TBScales.prototype.logscales = function() {
+TBWMNotequantiser.prototype.logscales = function() {
     for(var i = 0; i < this.mpscales.length; i++) {
         console.log(i + ": " + this.mpscales[i]["name"]);
     };
@@ -258,7 +258,7 @@ TBScales.prototype.logscales = function() {
 // Get scale info //
 ////////////////////
 
-TBScales.prototype.getscaleinfo = function() {
+TBWMNotequantiser.prototype.getscaleinfo = function() {
     // Return current scale info:
     // Scale Index (number) | Scale Name (string) | Scale Notes (array)
     return {index:this.scaleindex, name:this.mpscales[this.scaleindex]["name"], scale:this.scale};
@@ -268,7 +268,7 @@ TBScales.prototype.getscaleinfo = function() {
 // Dump scale info to Javascript console //
 ///////////////////////////////////////////
 
-TBScales.prototype.logscaleinfo = function() {
+TBWMNotequantiser.prototype.logscaleinfo = function() {
     // Return current scale info:
     // Scale Index (number) | Scale Name (string) | Scale Notes (array)
     console.log({index:this.scaleindex, name:this.mpscales[this.scaleindex]["name"], scale:this.scale});
